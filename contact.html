@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>Loungely Furinture - Desigining the future</title>
+    <link rel='shortcut icon' href='images/favicon.png' type='image/x-icon' >
+
+    <meta name="description" content="These days most furniture are designed to sell and not to last. For 19 years we have been perfecting the art of furniture full of Indian ingenuity our dedication to comfortable, long lasting furniture remains without compromise ">
+    <meta name="keywords" content="Furniture, Sofas, Kannur, Kozhikode, Kerala, India">
+    <meta name="company" content="Loungely Furniture">
+    <meta name="author" content="Morfspin Technologies">
+    <link rel='shortcut icon' href='images/favicon.png' type='image/x-icon' >
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/liteaccordion.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery.sidr.light.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/yamm.html" rel="stylesheet">
+    <link href="css/bootstrap-theme.html" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom.html" rel="stylesheet">
+    <link href="css/color.html" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        jQuery.fn.timelinr = function (options) {
+            // default plugin settings
+            settings = jQuery.extend({
+                orientation: 'horizontal',	// value: horizontal | vertical, default to horizontal
+                containerDiv: '#timeline',	// value: any HTML tag or #id, default to #timeline
+                datesDiv: '#dates',			// value: any HTML tag or #id, default to #dates
+                datesSelectedClass: 'selected',		// value: any class, default to selected
+                datesSpeed: 'normal',			// value: integer between 100 and 1000 (recommended) or 'slow', 'normal' or 'fast'; default to normal
+                issuesDiv: '#issues',		// value: any HTML tag or #id, default to #issues
+                issuesSelectedClass: 'selected',		// value: any class, default to selected
+                issuesSpeed: 'fast',				// value: integer between 100 and 1000 (recommended) or 'slow', 'normal' or 'fast'; default to fast
+                issuesTransparency: 0.2,					// value: integer between 0 and 1 (recommended), default to 0.2
+                issuesTransparencySpeed: 500,					// value: integer between 100 and 1000 (recommended), default to 500 (normal)
+                prevButton: '#prev',			// value: any HTML tag or #id, default to #prev
+                nextButton: '#next',			// value: any HTML tag or #id, default to #next
+                arrowKeys: 'false',			// value: true | false, default to false
+                startAt: 1,						// value: integer, default to 1 (first)
+                autoPlay: 'false',			// value: true | false, default to false
+                autoPlayDirection: 'forward',		// value: forward | backward, default to forward
+                autoPlayPause: 2000					// value: integer (1000 = 1 seg), default to 2000 (2segs)
+            }, options);
+
+            $(function () {
+                // Checks if required elements exist on page before initializing timelinr | improvement since 0.9.55
+                if ($(settings.datesDiv).length > 0 && $(settings.issuesDiv).length > 0) {
+                    // setting variables... many of them
+                    var howManyDates = $(settings.datesDiv + ' li').length;
+                    var howManyIssues = $(settings.issuesDiv + ' li').length;
+                    var currentDate = $(settings.datesDiv).find('a.' + settings.datesSelectedClass);
+                    var currentIssue = $(settings.issuesDiv).find('li.' + settings.issuesSelectedClass);
+                    var widthContainer = $(settings.containerDiv).width();
+                    var heightContainer = $(settings.containerDiv).height();
+                    var widthIssues = $(settings.issuesDiv).width();
+                    var heightIssues = $(settings.issuesDiv).height();
+                    var widthIssue = $(settings.issuesDiv + ' li').width();
+                    var heightIssue = $(settings.issuesDiv + ' li').height();
+                    var widthDates = $(settings.datesDiv).width();
+                    var heightDates = $(settings.datesDiv).height();
+                    var widthDate = $(settings.datesDiv + ' li').width();
+                    var heightDate = $(settings.datesDiv + ' li').height();
+                    // set positions!
+                    if (settings.orientation == 'horizontal') {
+                        $(settings.issuesDiv).width(widthIssue * howManyIssues);
+                        $(settings.datesDiv).width(widthDate * howManyDates).css('marginLeft', widthContainer / 2 - widthDate / 2);
+                        var defaultPositionDates = parseInt($(settings.datesDiv).css('marginLeft').substring(0, $(settings.datesDiv).css('marginLeft').indexOf('px')));
+                    } else if (settings.orientation == 'vertical') {
+                        $(settings.issuesDiv).height(heightIssue * howManyIssues);
+                        $(settings.datesDiv).height(heightDate * howManyDates).css('marginTop', heightContainer / 2 - heightDate / 2);
+                        var defaultPositionDates = parseInt($(settings.datesDiv).css('marginTop').substring(0, $(settings.datesDiv).css('marginTop').indexOf('px')));
+                    }
+
+                    $(settings.datesDiv + ' a').click(function (event) {
+                        event.preventDefault();
+                        // first vars
+                        var whichIssue = $(this).text();
+                        var currentIndex = $(this).parent().prevAll().length;
+                        // moving the elements
+                        if (settings.orientation == 'horizontal') {
+                            $(settings.issuesDiv).animate({'marginLeft': -widthIssue * currentIndex}, {
+                                queue: false,
+                                duration: settings.issuesSpeed
+                            });
+                        } else if (settings.orientation == 'vertical') {
+                            $(settings.issuesDiv).animate({'marginTop': -heightIssue * currentIndex}, {
+                                queue: false,
+                                duration: settings.issuesSpeed
+                            });
+                        }
+                        $(settings.issuesDiv + ' li').animate({'opacity': settings.issuesTransparency}, {
+                            queue: false,
+                            duration: settings.issuesSpeed
+                        }).removeClass(settings.issuesSelectedClass).eq(currentIndex).addClass(settings.issuesSelectedClass).fadeTo(settings.issuesTransparencySpeed, 1);
+                        // prev/next buttons now disappears on first/last issue | bugfix from 0.9.51: lower than 1 issue hide the arrows | bugfixed: arrows not showing when jumping from first to last date
+                        if (howManyDates == 1) {
+                            $(settings.prevButton + ',' + settings.nextButton).fadeOut('fast');
+                        } else if (howManyDates == 2) {
+                            if ($(settings.issuesDiv + ' li:first-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.prevButton).fadeOut('fast');
+                                $(settings.nextButton).fadeIn('fast');
+                            }
+                            else if ($(settings.issuesDiv + ' li:last-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.nextButton).fadeOut('fast');
+                                $(settings.prevButton).fadeIn('fast');
+                            }
+                        } else {
+                            if ($(settings.issuesDiv + ' li:first-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.nextButton).fadeIn('fast');
+                                $(settings.prevButton).fadeOut('fast');
+                            }
+                            else if ($(settings.issuesDiv + ' li:last-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.prevButton).fadeIn('fast');
+                                $(settings.nextButton).fadeOut('fast');
+                            }
+                            else {
+                                $(settings.nextButton + ',' + settings.prevButton).fadeIn('slow');
+                            }
+                        }
+                        // now moving the dates
+                        $(settings.datesDiv + ' a').removeClass(settings.datesSelectedClass);
+                        $(this).addClass(settings.datesSelectedClass);
+                        if (settings.orientation == 'horizontal') {
+                            $(settings.datesDiv).animate({'marginLeft': defaultPositionDates - (widthDate * currentIndex)}, {
+                                queue: false,
+                                duration: 'settings.datesSpeed'
+                            });
+                        } else if (settings.orientation == 'vertical') {
+                            $(settings.datesDiv).animate({'marginTop': defaultPositionDates - (heightDate * currentIndex)}, {
+                                queue: false,
+                                duration: 'settings.datesSpeed'
+                            });
+                        }
+                    });
+
+                    $(settings.nextButton).bind('click', function (event) {
+                        event.preventDefault();
+                        // bugixed from 0.9.54: now the dates gets centered when there's too much dates.
+                        var currentIndex = $(settings.issuesDiv).find('li.' + settings.issuesSelectedClass).index();
+                        if (settings.orientation == 'horizontal') {
+                            var currentPositionIssues = parseInt($(settings.issuesDiv).css('marginLeft').substring(0, $(settings.issuesDiv).css('marginLeft').indexOf('px')));
+                            var currentIssueIndex = currentPositionIssues / widthIssue;
+                            var currentPositionDates = parseInt($(settings.datesDiv).css('marginLeft').substring(0, $(settings.datesDiv).css('marginLeft').indexOf('px')));
+                            var currentIssueDate = currentPositionDates - widthDate;
+                            if (currentPositionIssues <= -(widthIssue * howManyIssues - (widthIssue))) {
+                                $(settings.issuesDiv).stop();
+                                $(settings.datesDiv + ' li:last-child a').click();
+                            } else {
+                                if (!$(settings.issuesDiv).is(':animated')) {
+                                    // bugixed from 0.9.52: now the dates gets centered when there's too much dates.
+                                    $(settings.datesDiv + ' li').eq(currentIndex + 1).find('a').trigger('click');
+                                }
+                            }
+                        } else if (settings.orientation == 'vertical') {
+                            var currentPositionIssues = parseInt($(settings.issuesDiv).css('marginTop').substring(0, $(settings.issuesDiv).css('marginTop').indexOf('px')));
+                            var currentIssueIndex = currentPositionIssues / heightIssue;
+                            var currentPositionDates = parseInt($(settings.datesDiv).css('marginTop').substring(0, $(settings.datesDiv).css('marginTop').indexOf('px')));
+                            var currentIssueDate = currentPositionDates - heightDate;
+                            if (currentPositionIssues <= -(heightIssue * howManyIssues - (heightIssue))) {
+                                $(settings.issuesDiv).stop();
+                                $(settings.datesDiv + ' li:last-child a').click();
+                            } else {
+                                if (!$(settings.issuesDiv).is(':animated')) {
+                                    // bugixed from 0.9.54: now the dates gets centered when there's too much dates.
+                                    $(settings.datesDiv + ' li').eq(currentIndex + 1).find('a').trigger('click');
+                                }
+                            }
+                        }
+                        // prev/next buttons now disappears on first/last issue | bugfix from 0.9.51: lower than 1 issue hide the arrows
+                        if (howManyDates == 1) {
+                            $(settings.prevButton + ',' + settings.nextButton).fadeOut('fast');
+                        } else if (howManyDates == 2) {
+                            if ($(settings.issuesDiv + ' li:first-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.prevButton).fadeOut('fast');
+                                $(settings.nextButton).fadeIn('fast');
+                            }
+                            else if ($(settings.issuesDiv + ' li:last-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.nextButton).fadeOut('fast');
+                                $(settings.prevButton).fadeIn('fast');
+                            }
+                        } else {
+                            if ($(settings.issuesDiv + ' li:first-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.prevButton).fadeOut('fast');
+                            }
+                            else if ($(settings.issuesDiv + ' li:last-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.nextButton).fadeOut('fast');
+                            }
+                            else {
+                                $(settings.nextButton + ',' + settings.prevButton).fadeIn('slow');
+                            }
+                        }
+                    });
+
+                    $(settings.prevButton).click(function (event) {
+                        event.preventDefault();
+                        // bugixed from 0.9.54: now the dates gets centered when there's too much dates.
+                        var currentIndex = $(settings.issuesDiv).find('li.' + settings.issuesSelectedClass).index();
+                        if (settings.orientation == 'horizontal') {
+                            var currentPositionIssues = parseInt($(settings.issuesDiv).css('marginLeft').substring(0, $(settings.issuesDiv).css('marginLeft').indexOf('px')));
+                            var currentIssueIndex = currentPositionIssues / widthIssue;
+                            var currentPositionDates = parseInt($(settings.datesDiv).css('marginLeft').substring(0, $(settings.datesDiv).css('marginLeft').indexOf('px')));
+                            var currentIssueDate = currentPositionDates + widthDate;
+                            if (currentPositionIssues >= 0) {
+                                $(settings.issuesDiv).stop();
+                                $(settings.datesDiv + ' li:first-child a').click();
+                            } else {
+                                if (!$(settings.issuesDiv).is(':animated')) {
+                                    // bugixed from 0.9.54: now the dates gets centered when there's too much dates.
+                                    $(settings.datesDiv + ' li').eq(currentIndex - 1).find('a').trigger('click');
+                                }
+                            }
+                        } else if (settings.orientation == 'vertical') {
+                            var currentPositionIssues = parseInt($(settings.issuesDiv).css('marginTop').substring(0, $(settings.issuesDiv).css('marginTop').indexOf('px')));
+                            var currentIssueIndex = currentPositionIssues / heightIssue;
+                            var currentPositionDates = parseInt($(settings.datesDiv).css('marginTop').substring(0, $(settings.datesDiv).css('marginTop').indexOf('px')));
+                            var currentIssueDate = currentPositionDates + heightDate;
+                            if (currentPositionIssues >= 0) {
+                                $(settings.issuesDiv).stop();
+                                $(settings.datesDiv + ' li:first-child a').click();
+                            } else {
+                                if (!$(settings.issuesDiv).is(':animated')) {
+                                    // bugixed from 0.9.54: now the dates gets centered when there's too much dates.
+                                    $(settings.datesDiv + ' li').eq(currentIndex - 1).find('a').trigger('click');
+                                }
+                            }
+                        }
+                        // prev/next buttons now disappears on first/last issue | bugfix from 0.9.51: lower than 1 issue hide the arrows
+                        if (howManyDates == 1) {
+                            $(settings.prevButton + ',' + settings.nextButton).fadeOut('fast');
+                        } else if (howManyDates == 2) {
+                            if ($(settings.issuesDiv + ' li:first-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.prevButton).fadeOut('fast');
+                                $(settings.nextButton).fadeIn('fast');
+                            }
+                            else if ($(settings.issuesDiv + ' li:last-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.nextButton).fadeOut('fast');
+                                $(settings.prevButton).fadeIn('fast');
+                            }
+                        } else {
+                            if ($(settings.issuesDiv + ' li:first-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.prevButton).fadeOut('fast');
+                            }
+                            else if ($(settings.issuesDiv + ' li:last-child').hasClass(settings.issuesSelectedClass)) {
+                                $(settings.nextButton).fadeOut('fast');
+                            }
+                            else {
+                                $(settings.nextButton + ',' + settings.prevButton).fadeIn('slow');
+                            }
+                        }
+                    });
+                    // keyboard navigation, added since 0.9.1
+                    if (settings.arrowKeys == 'true') {
+                        if (settings.orientation == 'horizontal') {
+                            $(document).keydown(function (event) {
+                                if (event.keyCode == 39) {
+                                    $(settings.nextButton).click();
+                                }
+                                if (event.keyCode == 37) {
+                                    $(settings.prevButton).click();
+                                }
+                            });
+                        } else if (settings.orientation == 'vertical') {
+                            $(document).keydown(function (event) {
+                                if (event.keyCode == 40) {
+                                    $(settings.nextButton).click();
+                                }
+                                if (event.keyCode == 38) {
+                                    $(settings.prevButton).click();
+                                }
+                            });
+                        }
+                    }
+                    // default position startAt, added since 0.9.3
+                    $(settings.datesDiv + ' li').eq(settings.startAt - 1).find('a').trigger('click');
+                    // autoPlay, added since 0.9.4
+                    if (settings.autoPlay == 'true') {
+                        setInterval("autoPlay()", settings.autoPlayPause);
+                    }
+                }
+            });
+        };
+        // autoPlay, added since 0.9.4
+        function autoPlay() {
+            var currentDate = $(settings.datesDiv).find('a.' + settings.datesSelectedClass);
+            if (settings.autoPlayDirection == 'forward') {
+                if (currentDate.parent().is('li:last-child')) {
+                    $(settings.datesDiv + ' li:first-child').find('a').trigger('click');
+                } else {
+                    currentDate.parent().next().find('a').trigger('click');
+                }
+            } else if (settings.autoPlayDirection == 'backward') {
+                if (currentDate.parent().is('li:first-child')) {
+                    $(settings.datesDiv + ' li:last-child').find('a').trigger('click');
+                } else {
+                    currentDate.parent().prev().find('a').trigger('click');
+                }
+            }
+        }
+        $(function () {
+            $().timelinr({
+                arrowKeys: 'true'
+            })
+        });
+    </script>
+    <script>
+
+    </script>
+</head>
+
+<body>
+<header class="bg-dark-gray header-style-1">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="header-btns">
+                    <!--<a class="btn-dark plus" href="#">dollar</a>-->
+                    <a class="btn-dark plus" href="shop.html">Store coming soon</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="logo">
+                    <div class="text-center">
+                        <a href="index.html">
+                            <img src="images/header-logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="header-links">
+                    <ul class="list-unstyled text-center">
+                        <li>
+                            <a  href="https://www.facebook.com/Loungely-Furniture-210516312739591/" class="icon-hold search">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <p></p>
+                        </li>
+                        <li>
+                            <a  href="https://twitter.com/loungely" class="icon-hold cart">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <p></p>
+                        </li>
+                        <li>
+                            <a  href="https://www.youtube.com/channel/UCpn-mFI8A4t2Y09bTDQG7ng" class="icon-hold links">
+                                <i class="fa fa-youtube"></i>
+                            </a>
+                            <p></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar yamm navbar-default">
+        <div class="container ">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target="#navbar-collapse-1" class="navbar-toggle">
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            </div>
+            <div id="navbar-collapse-1" class="navbar-collapse collapse">
+                <ul class="main-nav nav navbar-nav">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="#">SERVICE</a>
+
+                    </li>
+                    <li><a href="about.html">ABOUT</a>
+
+                    </li>
+                    <li class=""><a href="contact.html">CONTACT US</a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="">
+
+    <!--TimeLIne-->
+    <!--<div id="timeline">
+        <ul id="dates">
+            <li><a href="#1990">1990</a></li>
+            <li><a href="#1995">1995</a></li>
+            <li><a href="#2000">2000</a></li>
+            <li><a href="#2001">2001</a></li>
+            <li><a href="#2002">2002</a></li>
+            <li><a href="#2004">2004</a></li>
+            <li><a href="#2005">2005</a></li>
+            <li><a href="#2006">2006</a></li>
+            <li><a href="#2015">2015</a></li>
+            <li><a href="#2016">2016</a></li>
+        </ul>
+        <ul id="issues">
+            <li id="1990">
+                <img src="./test/jQuery-Timelinr-master/images/1.png" width="256" height="256" />
+                <h1>1990</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="1995">
+                <img src="./test/jQuery-Timelinr-master/images/2.png" width="256" height="256" />
+                <h1>1995</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2000">
+                <img src="./test/jQuery-Timelinr-master/images/3.png" width="256" height="256" />
+                <h1>2000</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2001">
+                <img src="./test/jQuery-Timelinr-master/images/4.png" width="256" height="256" />
+                <h1>2001</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2002">
+                <img src="./test/jQuery-Timelinr-master/images/5.png" width="256" height="256" />
+                <h1>2002</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2004">
+                <img src="./test/jQuery-Timelinr-master/images/6.png" width="256" height="256" />
+                <h1>2004</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2005">
+                <img src="./test/jQuery-Timelinr-master/images/7.png" width="256" height="256" />
+                <h1>2005</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2006">
+                <img src="./test/jQuery-Timelinr-master/images/8.png" width="256" height="256" />
+                <h1>2006</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2015">
+                <img src="./test/jQuery-Timelinr-master/images/9.png" width="256" height="256" />
+                <h1>2015</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+            <li id="2016">
+                <img src="./test/jQuery-Timelinr-master/images/10.png" width="256" height="256" />
+                <h1>2016</h1>
+                <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+            </li>
+        </ul>
+        <div id="grad_left"></div>
+        <div id="grad_right"></div>
+        <a href="#" id="next">+</a>
+        <a href="#" id="prev">-</a>
+    </div>-->
+    <!--Timeline ends-->
+
+    <div  style="
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.65);
+    height: 400px;
+    position: relative;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 818.125px 200px;
+    transform-origin: 818.125px 200px;
+    background: rgba(0, 0, 0, 0) url('http://www.luxmyfurniture.com.au/wp-content/uploads/2014/12/contact-map-bg1.jpg') repeat scroll 50% 50% / cover padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal 600 normal 38px / 40px Helvetica;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 75px 0px 0px;
+    ">
+        <img src="./images/gradient/icon.png" alt="" id="" /><br /> Loungely Furniture , Valapattanam, Kannur, Kerala<br id="BR_4" /> <span id="SPAN_5"> <a href="tel:+918147713985
+" id="A_6">+91 81 477 139 85
+</a><br id="BR_7" /><a href="mailto:info@loungelyfurniture.com" id="A_8"></a></span>
+    </div>
+    <div class="container-fluid">
+    <style scoped>
+        #DIV_1 {
+            background-position: 50% 50%;
+            bottom: 0px;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            height: 400px;
+            left: 0px;
+            position: relative;
+            right: 0px;
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            top: 0px;
+            /*width: 1636.25px;*/
+            column-rule-color: rgb(255, 255, 255);
+            perspective-origin: 818.125px 200px;
+            transform-origin: 818.125px 200px;
+            background: rgba(0, 0, 0, 0) url("http://www.luxmyfurniture.com.au/wp-content/uploads/2014/12/contact-map-bg1.jpg") repeat scroll 50% 50% / cover padding-box border-box;
+            border: 0px none rgb(255, 255, 255);
+            font: normal normal 600 normal 38px / 40px Helvetica;
+            outline: rgb(255, 255, 255) none 0px;
+            padding: 75px 0px 0px;
+        }/*#DIV_1*/
+
+        #IMG_2 {
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            height: 62.9883px;
+            max-width: 100%;
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            vertical-align: middle;
+            /*width: 62.9883px;*/
+            column-rule-color: rgb(255, 255, 255);
+            perspective-origin: 31.4844px 31.4844px;
+            transform-origin: 31.4844px 31.4844px;
+            border: 0px none rgb(255, 255, 255);
+            font: normal normal 600 normal 38px / 40px Helvetica;
+            margin: 0px 0px 40px;
+            outline: rgb(255, 255, 255) none 0px;
+        }/*#IMG_2*/
+
+        #BR_3, #BR_4 {
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            column-rule-color: rgb(255, 255, 255);
+            border: 0px none rgb(255, 255, 255);
+            font: normal normal 600 normal 38px / 40px Helvetica;
+            outline: rgb(255, 255, 255) none 0px;
+        }/*#BR_3, #BR_4*/
+
+        #SPAN_5 {
+            box-sizing: border-box;
+            color: rgb(109, 109, 109);
+            display: block;
+            height: 25px;
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            /*width: 1636.25px;*/
+            column-rule-color: rgb(109, 109, 109);
+            perspective-origin: 818.125px 12.5px;
+            transform-origin: 818.125px 12.5px;
+            border: 0px none rgb(109, 109, 109);
+            font: normal normal 600 normal 18px / 25px Helvetica;
+            margin: 25px 0px 0px;
+            outline: rgb(109, 109, 109) none 0px;
+        }/*#SPAN_5*/
+
+        #A_6, #A_8 {
+            box-sizing: border-box;
+            color: rgb(109, 109, 109);
+            text-align: center;
+            text-decoration: none;
+            text-rendering: optimizeLegibility;
+            column-rule-color: rgb(109, 109, 109);
+            border: 0px none rgb(109, 109, 109);
+            font: normal normal 600 normal 18px / 25px Helvetica;
+            outline: rgb(109, 109, 109) none 0px;
+            transition: all 0.3s ease-in-out 0s;
+        }/*#A_6, #A_8*/
+
+        #BR_7 {
+            box-sizing: border-box;
+            color: rgb(109, 109, 109);
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            column-rule-color: rgb(109, 109, 109);
+            border: 0px none rgb(109, 109, 109);
+            font: normal normal 600 normal 18px / 25px Helvetica;
+            outline: rgb(109, 109, 109) none 0px;
+        }/*#BR_7*/
+
+        #DIV_9 {
+            bottom: 0px;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            height: 40px;
+            left: 818.125px;
+            position: absolute;
+            right: 688.125px;
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            text-transform: uppercase;
+            top: 360px;
+            width: 230px;
+            column-rule-color: rgb(255, 255, 255);
+            perspective-origin: 115px 20px;
+            transform-origin: 115px 20px;
+            background: rgb(0, 0, 128) none repeat scroll 0% 0% / auto padding-box border-box;
+            border: 0px none rgb(255, 255, 255);
+            font: normal normal 600 normal 16px / 40px Helvetica;
+            margin: 0px 0px 0px -100px;
+            outline: rgb(255, 255, 255) none 0px;
+            padding: 0px 10px 0px 45px;
+        }/*#DIV_9*/
+
+        #I_10 {
+            bottom: 8.02734px;
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            display: block;
+            height: 23.9844px;
+            left: 10px;
+            position: absolute;
+            right: 196.016px;
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            text-transform: uppercase;
+            top: 8px;
+            width: 23.9844px;
+            column-rule-color: rgb(255, 255, 255);
+            perspective-origin: 11.9922px 11.9922px;
+            transform-origin: 11.9922px 11.9922px;
+            background: rgba(0, 0, 0, 0) url("http://www.luxmyfurniture.com.au/wp-content/themes/EndingCredits/images/map.png") repeat scroll 0% 0% / auto padding-box border-box;
+            border: 0px none rgb(255, 255, 255);
+            font: italic normal 600 normal 16px / 40px Helvetica;
+            outline: rgb(255, 255, 255) none 0px;
+        }/*#I_10*/
+
+        #P_11 {
+            box-sizing: border-box;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            display: inline-block;
+            height: 40px;
+            text-align: center;
+            text-rendering: optimizeLegibility;
+            text-transform: uppercase;
+            width: 164.727px;
+            column-rule-color: rgb(255, 255, 255);
+            perspective-origin: 82.3633px 20px;
+            transform-origin: 82.3633px 20px;
+            border: 0px none rgb(255, 255, 255);
+            font: normal normal 600 normal 16px / 40px Helvetica;
+            margin: 0px;
+            outline: rgb(255, 255, 255) none 0px;
+        }/*#P_11*/
+
+
+    </style>
+
+
+
+        <div>
+            <div class="col-md-12" style="margin-top: 3em">
+                <h1  style="text-align: center">
+                    <strong>GET IN TOUCH /</strong> Contact Form
+                </h1>
+                <p id="contact-us-intro">
+                    Want to say hello? Want to know more about us? Give us a call or drop us an email and we will
+                    get back to you as soon as we can
+                </p>
+            </div>
+            <div class="col-md-5" style="">
+                <div id="map" style="height: 700px;width: 100%"></div>
+                <script>
+                    function initMap() {
+                        var uluru = {lat: 11.869977, lng: 75.366671};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 14,
+                            center: uluru,
+                            styles: [
+                                {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                                {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                                {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                                {
+                                    featureType: 'administrative.locality',
+                                    elementType: 'labels.text.fill',
+                                    stylers: [{color: '#d59563'}]
+                                },
+                                {
+                                    featureType: 'poi',
+                                    elementType: 'labels.text.fill',
+                                    stylers: [{color: '#d59563'}]
+                                },
+                                {
+                                    featureType: 'poi.park',
+                                    elementType: 'geometry',
+                                    stylers: [{color: '#263c3f'}]
+                                },
+                                {
+                                    featureType: 'poi.park',
+                                    elementType: 'labels.text.fill',
+                                    stylers: [{color: '#6b9a76'}]
+                                },
+                                {
+                                    featureType: 'road',
+                                    elementType: 'geometry',
+                                    stylers: [{color: '#38414e'}]
+                                },
+                                {
+                                    featureType: 'road',
+                                    elementType: 'geometry.stroke',
+                                    stylers: [{color: '#212a37'}]
+                                },
+                                {
+                                    featureType: 'road',
+                                    elementType: 'labels.text.fill',
+                                    stylers: [{color: '#9ca5b3'}]
+                                },
+                                {
+                                    featureType: 'road.highway',
+                                    elementType: 'geometry',
+                                    stylers: [{color: '#746855'}]
+                                },
+                                {
+                                    featureType: 'road.highway',
+                                    elementType: 'geometry.stroke',
+                                    stylers: [{color: '#1f2835'}]
+                                },
+                                {
+                                    featureType: 'road.highway',
+                                    elementType: 'labels.text.fill',
+                                    stylers: [{color: '#f3d19c'}]
+                                },
+                                {
+                                    featureType: 'transit',
+                                    elementType: 'geometry',
+                                    stylers: [{color: '#2f3948'}]
+                                },
+                                {
+                                    featureType: 'transit.station',
+                                    elementType: 'labels.text.fill',
+                                    stylers: [{color: '#d59563'}]
+                                },
+                                {
+                                    featureType: 'water',
+                                    elementType: 'geometry',
+                                    stylers: [{color: '#17263c'}]
+                                },
+                                {
+                                    featureType: 'water',
+                                    elementType: 'labels.text.fill',
+                                    stylers: [{color: '#515c6d'}]
+                                },
+                                {
+                                    featureType: 'water',
+                                    elementType: 'labels.text.stroke',
+                                    stylers: [{color: '#17263c'}]
+                                }
+                            ]
+                        });
+                        var marker = new google.maps.Marker({
+                            position: uluru,
+                            map: map
+                        });
+                    }
+                </script>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6rVksAbJet-BYG0uPqYgbaQLc0K6g2a8&callback=initMap">
+                </script>
+            </div>
+            <div id="col-md-7">
+                <div class="contact-us">
+                    <form action="mail.php"   method="post" class="col-md-6 contactus-form">
+                        <div class="input-section">
+                            <input type="hidden" name="_wpcf7" value="37" id="INPUT_12"/>
+                            <input type="hidden" name="_wpcf7_version" value="4.4.2" id="INPUT_13"/>
+                            <input type="hidden" name="_wpcf7_locale" value="en_US" id="INPUT_14"/>
+                            <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f37-p10-o1" id="INPUT_15"/>
+                            <input type="hidden" name="_wpnonce" value="963fa5aef9" id="INPUT_16"/>
+                        </div>
+                        <div class="input-section">
+                            <label>
+                                Name* :
+                            </label> <input type="text" name="name" size="40"/>
+                        </div>
+                        <div class="input-section">
+                            <label id="LABEL_22">
+                                company* :
+                            </label> <span id="SPAN_23"><input type="text" name="company" size="40" id="INPUT_24"/></span>
+                        </div>
+                        <div class="input-section">
+                            <label id="LABEL_26">
+                                Address* :
+                            </label> <span id="SPAN_27"><input type="text" name="address" size="40" id="INPUT_28"/></span>
+                        </div>
+                        <div class="input-section">
+                            <label id="LABEL_30">
+                                Email* :
+                            </label> <span id="SPAN_31"><input type="email" name="email" size="40" id="INPUT_32"/></span>
+                        </div>
+                        <div class="input-section">
+                            <label id="LABEL_34">
+                                Subject* :
+                            </label> <span id="SPAN_35"><input type="text" name="subject" size="40" id="INPUT_36"/></span>
+                        </div>
+                        <div class="input-section">
+                            <label id="LABEL_38">
+                                Message :
+                            </label><span id="SPAN_39"></span>
+					<textarea name="message" cols="40" rows="10" ></textarea>
+                        </div>
+                        <p id=class="input-section" class="col-md-12">
+                            <input type="submit" value="Submit" name="submit"><!--<img
+                                src="http://www.luxmyfurniture.com.au/wp-content/plugins/contact-form-7/images/ajax-loader.gif"
+                                alt="Sending ..." id="IMG_43"/>-->
+                        </p>
+
+                    </form>
+                </div>
+            </div>
+            <div id="DIV_45">
+            </div>
+        </div>
+    </div>
+</section>
+<div></div>
+
+<!-- Social Links Section Start -->
+<div class="news-letter-style-1 bg-light-gray animated out" data-delay="0" data-animation="bounceIn">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 social-links">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://www.facebook.com/Loungely-Furniture-210516312739591/">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/loungely">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/channel/UCpn-mFI8A4t2Y09bTDQG7ng">
+                            <i class="fa fa-youtube"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://plus.google.com/116713739752303456259">
+                            <i class="fa fa-google"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-7">
+                <div class="news-letter-form">
+                    <h4>CONTACT US</h4>
+                    <form>
+                        <input type="text" placeholder="Enter Your Email Address">
+                        <a href="" class="btn-dark plus">Subscribe</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Start -->
+<section class="section bg-dark-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="widget about-us-widget animated out" data-delay="0" data-animation="fadeInUp">
+                    <div class="heading-with-plus">
+                        <h4>ABOUT US</h4>
+                    </div>
+                    <div class="logo">
+                        <img src="images/header-logo.png" alt="Logo Image">
+                    </div>
+                    <p>We are in the business of building trust. we'll do what it takes to earn your loyalty. We want relationship more than a transaction.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="widget theme-feature-widget animated out" data-delay="300" data-animation="fadeInUp">
+                    <div class="heading-with-plus">
+                        <h4>OUR SERVICES</h4>
+                    </div>
+                    <ul class="theme-features-list list-unstyled">
+                        <li><a href="#">Furniture Manufacture</a></li>
+                        <li><a href="#">Furniture Sales</a></li>
+                        <li><a href="#">Interior design</a></li>
+                        <li><a href="#">Re-Upholstery </a></li>
+                        <li><a href="#">Custom Sofa</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="widget key-feature-widget animated out" data-delay="600" data-animation="fadeInUp">
+                    <div class="heading-with-plus">
+                        <h4>STORE KEY FEATURES</h4>
+                    </div>
+                    <ul class="key-feature-list list-unstyled">
+                        <li>
+                            <span>1</span>
+                            <p>Choose your wishlist products then add to cart.</p>
+                        </li>
+                        <li>
+                            <span>2</span>
+                            <p>Call us for more info about our products.</p>
+                        </li>
+                        <li>
+                            <span>3</span>
+                            <p>Pay by creadit card.</p>
+                        </li>
+                        <li>
+                            <span>4</span>
+                            <p>We will send this product in 2 days.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="widget contact-us-widget animated out" data-delay="900" data-animation="fadeInUp">
+                    <div class="heading-with-plus">
+                        <h4>CONTACT US</h4>
+                    </div>
+                    <ul class="contact-us-list list-unstyled">
+                        <li>
+                            <span><i class="fa fa-home"></i></span>
+                            <p>Inside western Indian Cottons</p>
+                            <p>NH17, Near Valapattanam Bridge</p>
+                            <p style="padding-left: 50px">       Pappinisseri, Kannur-670561</p>
+                        </li>
+                        <li>
+                            <span><i class="fa fa-mobile"></i></span>
+                            <p>+91 8891199299</p>
+                            <p>+91 8891299299</p>
+                        </li>
+                        <li>
+                            <span><i class="fa fa-envelope-o"></i></span>
+                            <p>info@loungelyfurniture.com</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer with widgets Section Start -->
+
+
+<!-- Bottom Bar Section Style -->
+<div class="bottom-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="copy-right-text">
+                    <span>© Copyright 2016.</span>
+                    <a href="http://www.morfspin.com/">Morfspin Technologies</a>
+                </div>
+            </div>
+            <!--
+                        <div class="col-md-6">
+                            <ul class="list-unstyled payment-list">
+                                <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                                <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                            </ul>
+                        </div>
+            -->
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.appear.js"></script>
+<script src="js/liteaccordion.jquery.min.js"></script>
+<script src="js/jquery.ui.core.js"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.ui.mouse.js"></script>
+<script src="js/jquery.ui.slider.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.sidr.min.js"></script>
+<script src="js/script.js"></script>
+<script>
+    $(document).ready(function () {
+        var elem = $('#container ul');
+        $('#viewcontrols a').on('click', function (e) {
+            if ($(this).hasClass('gridview')) {
+                elem.fadeOut(1000, function () {
+                    $('#container ul').removeClass('list').addClass('grid');
+                    $('#viewcontrols').removeClass('view-controls-list').addClass('view-controls-grid');
+                    $('#viewcontrols .gridview').addClass('active');
+                    $('#viewcontrols .listview').removeClass('active');
+                    elem.fadeIn(1000);
+                });
+            }
+            else if ($(this).hasClass('listview')) {
+                elem.fadeOut(1000, function () {
+                    $('#container ul').removeClass('grid').addClass('list');
+                    $('#viewcontrols').removeClass('view-controls-grid').addClass('view-controls-list');
+                    $('#viewcontrols .gridview').removeClass('active');
+                    $('#viewcontrols .listview').addClass('active');
+                    elem.fadeIn(1000);
+                });
+            }
+        });
+    });
+    jQuery(function ($) {
+        $(".slider-range").slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [0, 300],
+            slide: function (event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>
+
+</body>
+
+</html>
+
